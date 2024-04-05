@@ -10,10 +10,6 @@ import java.util.List;
 @Table(name = "brands")
 public class BrandEntity extends BaseEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-
     @Column(name = "name_brand")
     private String nameBrand;
 

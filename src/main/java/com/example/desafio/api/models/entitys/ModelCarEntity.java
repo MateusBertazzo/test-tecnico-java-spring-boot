@@ -9,9 +9,6 @@ import java.util.List;
 @Table(name = "model_cars")
 @Data
 public class ModelCarEntity extends BaseEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     private String name;
 

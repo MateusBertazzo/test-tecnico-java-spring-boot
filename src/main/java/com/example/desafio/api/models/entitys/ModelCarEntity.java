@@ -13,7 +13,7 @@ public class ModelCarEntity extends BaseEntity {
 
     private String name;
 
-    @Column(name = "price_fip", precision = 8, scale = 3)
+    @Column(name = "price_fip", precision = 12, scale = 3)
     private BigDecimal priceFip;
 
     @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)

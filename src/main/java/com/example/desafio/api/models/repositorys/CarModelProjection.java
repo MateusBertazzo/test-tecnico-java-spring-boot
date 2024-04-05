@@ -1,5 +1,7 @@
 package com.example.desafio.api.models.repositorys;
 
+import java.math.BigDecimal;
+
 // Interface serve para que o JPA consiga fazer a projeção dos dados e retornar no formato que desejo
 public interface CarModelProjection {
     Long getId();
@@ -10,5 +12,5 @@ public interface CarModelProjection {
     String getFuel();
     Integer getNumDoors();
     String getColor();
-    Double getPriceFip();
+    BigDecimal getPriceFip();
 }

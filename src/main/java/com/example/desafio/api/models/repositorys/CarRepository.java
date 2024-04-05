@@ -18,7 +18,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
             "car.fuel as fuel, " +
             "car.numDoors as numDoors, " +
             "car.color as color, " +
-            "model.priceFip as priceFip " +
+            "car.modelId.priceFip as priceFip " +
             "FROM CarEntity car " +
             "JOIN car.modelId model")
     List<CarModelProjection> findAllCarsAndModelName();

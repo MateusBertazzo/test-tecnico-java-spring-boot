@@ -1,24 +1,28 @@
 package com.example.desafio.api.controllers;
 
+import com.example.desafio.api.models.dtos.CarDto;
+import com.example.desafio.api.services.ApiResponseService;
 import com.example.desafio.api.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/car")
 public class CarController {
 
-    private CarService carService;
+    private final CarService carService;
 
     @Autowired
     public CarController(CarService carService) {
         this.carService = carService;
+    }
+
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ApiResponseService> registerCar(@RequestBody CarDto carDto) {
+        return carService.registerCar(carDto);
     }
 
     /**
@@ -26,9 +30,9 @@ public class CarController {
      *
      * @return  List<Object[]>
      */
-    @GetMapping("/all-cars")
+    @GetMapping("/get-all")
     @ResponseStatus(HttpStatus.OK)
-    public List<Object[]> findAllCarsAndModelName() {
+    public ResponseEntity<ApiResponseService> findAllCarsAndModelName() {
         return carService.findAllCarsAndModelName();
     }
 }

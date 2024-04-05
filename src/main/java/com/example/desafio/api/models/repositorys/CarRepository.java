@@ -12,6 +12,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     // query que irá retornar todos os carros + o nome da marca que está associada a ele
     @Query("SELECT car, model.name FROM CarEntity car JOIN car.modelId model")
-    List<Object[]> findAllCarsWithBrandData();
+    List<Object[]> findAllCarsAndModelName();
 
 }

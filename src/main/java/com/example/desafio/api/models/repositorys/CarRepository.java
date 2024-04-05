@@ -4,7 +4,6 @@ import com.example.desafio.api.models.entitys.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -23,6 +22,4 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
             "FROM CarEntity car " +
             "JOIN car.modelId model")
     List<CarModelProjection> findAllCarsAndModelName();
-
-
 }

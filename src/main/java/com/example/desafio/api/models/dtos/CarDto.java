@@ -4,6 +4,8 @@ import com.example.desafio.api.models.entitys.BrandEntity;
 import com.example.desafio.api.models.entitys.CarEntity;
 import com.example.desafio.api.models.entitys.ModelCarEntity;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
@@ -16,7 +18,7 @@ public class CarDto {
     private String fuel;
     private Integer numDoors;
     private String color;
-    private Double priceFip;
+    private BigDecimal priceFip;
 
     // Converte um DTO para uma entidade Brand
     public BrandEntity toBrand() {

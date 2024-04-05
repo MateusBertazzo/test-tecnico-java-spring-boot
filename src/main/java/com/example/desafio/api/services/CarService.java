@@ -1,7 +1,7 @@
 package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.GetAllCarsException;
-import com.example.desafio.api.exceptions.PostRegisterCarException;
+import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.CarDto;
 import com.example.desafio.api.models.entitys.BrandEntity;
 import com.example.desafio.api.models.entitys.CarEntity;
@@ -12,8 +12,6 @@ import com.example.desafio.api.models.repositorys.ModelCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CarService {
@@ -34,7 +32,7 @@ public class CarService {
      * Método responsável por registrar um carro
      *
      * @param   carDto
-     * @return  void
+     * @return  ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> registerCar(CarDto carDto) {
         try {
@@ -61,7 +59,7 @@ public class CarService {
     /**
      * Método responsável por retornar todos os carros e o nome do modelo associado
      *
-     * @return  List<Object[]>
+     * @return  ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> findAllCarsAndModelName() {
 
@@ -70,7 +68,36 @@ public class CarService {
 
             return ApiResponseService.createSuccessResponse(true, "Sucesso", getAllCars);
         } catch (Exception e) {
-            throw new GetAllCarsException();
+            return ApiResponseService.createErrorResponse("Erro ao buscar os carros:" + e.getMessage());
+        }
+    }
+
+    /**
+     * Método responsável por atualizar um carro
+     *
+     * @return  ResponseEntity<ApiResponseService>
+     */
+    public ResponseEntity<ApiResponseService> updateCar(Long id, CarDto carDto) {
+        try {
+
+            CarEntity carToUpdate = carRepository.findById(id).orElseThrow(() -> new CarExceptions("Carro não encontrado"));
+
+            if (carToUpdate == null) {
+                return ApiResponseService.createErrorResponse("Carro não encontrado");
+            }
+
+            // Atualizando carro
+            carToUpdate.setFuel(carDto.getFuel());
+            carToUpdate.setColor(carDto.getColor());
+            carToUpdate.setYear(carDto.getYear());
+            carToUpdate.setNumDoors(carDto.getNumDoors());
+
+            carRepository.save(carToUpdate);
+
+            return ApiResponseService.createSuccessResponse(true, "Carro atualizado com sucesso", null);
+
+        } catch (Exception e) {
+            return ApiResponseService.createErrorResponse("Erro ao atualizar o carro:" + e.getMessage());
         }
     }
 }

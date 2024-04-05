@@ -20,7 +20,7 @@ public class CarController {
     }
 
     /**
-     * Controller responsável por registrar um carro
+     * Controller responsável por REGISTRAR um carro
      *
      * @param   carDto
      * @return  ResponseEntity<ApiResponseService>
@@ -32,7 +32,7 @@ public class CarController {
     }
 
     /**
-     * Controller responsável por retornar todos os carros e o nome do modelo associado
+     * Controller responsável por retornar TODOS os carros e o nome do modelo associado
      *
      * @return  ResponseEntity<ApiResponseService>
      */
@@ -40,5 +40,16 @@ public class CarController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ApiResponseService> findAllCarsAndModelName() {
         return carService.findAllCarsAndModelName();
+    }
+
+    /**
+     * Controller responsável por retornar ATUALIZAR um carro
+     *
+     * @return  ResponseEntity<ApiResponseService>
+     */
+    @PutMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponseService> updateCar(@PathVariable Long id, @RequestBody CarDto carDto) {
+        return carService.updateCar(id, carDto);
     }
 }

@@ -45,6 +45,7 @@ public class CarDto {
         carEntity.setColor(color);
         carEntity.setYear(year);
         carEntity.setFuel(fuel);
+        carEntity.setNumDoors(numDoors);
 
         // Convertendo LocalDateTime para timesTamp Unix
         carEntity.setTimestampRegister(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));

@@ -24,9 +24,9 @@ public class ApiResponseService {
         this.message = message;
     }
 
-    // Case Sucess
+    // Case Success
     public static ResponseEntity<ApiResponseService> createSuccessResponse(Boolean Success, String message, Object response) {
-        return ResponseEntity.ok(new ApiResponseService(true, "Sucesso", response));
+        return ResponseEntity.ok(new ApiResponseService(true, message, response));
     }
 
     // Case Error

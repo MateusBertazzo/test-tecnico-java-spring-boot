@@ -8,10 +8,10 @@ import java.util.List;
 @Entity
 @Table(name = "model_cars")
 @Data
-public class ModelCarEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ModelCarEntity extends BaseEntity {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private String name;
 
@@ -20,4 +20,8 @@ public class ModelCarEntity {
 
     @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarEntity> cars;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private BrandEntity brandId;
 }

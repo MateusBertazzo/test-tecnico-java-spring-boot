@@ -52,4 +52,15 @@ public class CarController {
     public ResponseEntity<ApiResponseService> updateCar(@PathVariable Long id, @RequestBody CarDto carDto) {
         return carService.updateCar(id, carDto);
     }
+
+    /**
+     * Controller responsável por DELETAR um carro
+     *
+     * @return  ResponseEntity<ApiResponseService>
+     */
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponseService> deleteCar(@PathVariable Long id) {
+        return carService.deleteCar(id);
+    }
 }

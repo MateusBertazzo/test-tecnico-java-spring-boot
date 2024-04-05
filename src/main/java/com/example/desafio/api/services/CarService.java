@@ -31,8 +31,8 @@ public class CarService {
     /**
      * Método responsável por registrar um carro
      *
-     * @param   carDto
-     * @return  ResponseEntity<ApiResponseService>
+     * @param carDto
+     * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> registerCar(CarDto carDto) {
         try {
@@ -59,7 +59,7 @@ public class CarService {
     /**
      * Método responsável por retornar todos os carros e o nome do modelo associado
      *
-     * @return  ResponseEntity<ApiResponseService>
+     * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> findAllCarsAndModelName() {
 
@@ -75,7 +75,7 @@ public class CarService {
     /**
      * Método responsável por atualizar um carro
      *
-     * @return  ResponseEntity<ApiResponseService>
+     * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> updateCar(Long id, CarDto carDto) {
         try {
@@ -98,6 +98,30 @@ public class CarService {
 
         } catch (Exception e) {
             return ApiResponseService.createErrorResponse("Erro ao atualizar o carro:" + e.getMessage());
+        }
+    }
+
+    /**
+     * Método responsável por deletar um carro
+     *
+     * @return ResponseEntity<ApiResponseService>
+     */
+    public ResponseEntity<ApiResponseService> deleteCar(Long id) {
+        try {
+            CarEntity carToDelete = carRepository.findById(id).orElseThrow(() -> new CarExceptions("Carro não encontrado"));
+
+            if (carToDelete == null) {
+                return ApiResponseService.createErrorResponse("Carro não encontrado");
+            }
+
+            carToDelete.setDeleted(true);
+
+            carRepository.save(carToDelete);
+
+            return ApiResponseService.createSuccessResponse(true, "Carro deletado com sucesso", null);
+
+        } catch (Exception e) {
+            return ApiResponseService.createErrorResponse("Erro ao deletar o carro:" + e.getMessage());
         }
     }
 }

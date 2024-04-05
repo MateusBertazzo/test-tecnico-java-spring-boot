@@ -15,4 +15,12 @@ public class BrandEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "brandId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ModelCarEntity> modelCars;
+
+    public BrandEntity(String nameBrand, List<ModelCarEntity> modelCars) {
+        this.nameBrand = nameBrand;
+        this.modelCars = modelCars;
+    }
+
+    public BrandEntity() {
+    }
 }

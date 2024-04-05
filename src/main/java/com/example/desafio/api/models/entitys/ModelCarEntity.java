@@ -21,4 +21,14 @@ public class ModelCarEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private BrandEntity brandId;
+
+    public ModelCarEntity(String name, Double priceFip, List<CarEntity> cars, BrandEntity brandId) {
+        this.name = name;
+        this.priceFip = priceFip;
+        this.cars = cars;
+        this.brandId = brandId;
+    }
+
+    public ModelCarEntity() {
+    }
 }

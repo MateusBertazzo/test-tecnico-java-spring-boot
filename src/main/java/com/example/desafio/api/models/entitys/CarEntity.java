@@ -25,4 +25,16 @@ public class CarEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "model_id")
     private ModelCarEntity modelId;
+
+    public CarEntity(LocalDateTime timestampRegister, Integer year, String fuel, Integer numDoors, String color, ModelCarEntity modelId) {
+        this.timestampRegister = timestampRegister;
+        this.year = year;
+        this.fuel = fuel;
+        this.numDoors = numDoors;
+        this.color = color;
+        this.modelId = modelId;
+    }
+
+    public CarEntity() {
+    }
 }

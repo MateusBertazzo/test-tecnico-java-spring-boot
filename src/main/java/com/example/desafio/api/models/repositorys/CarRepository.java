@@ -11,7 +11,18 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     // query que irá retornar todos os carros + o nome da marca que está associada a ele
-    @Query("SELECT car, model.name FROM CarEntity car JOIN car.modelId model")
-    List<Object[]> findAllCarsAndModelName();
+    @Query("SELECT car.id as id, " +
+            "car.timestampRegister as timestampRegister, " +
+            "car.modelId.id as modelId, " +
+            "model.name as modelName, " +
+            "car.year as year, " +
+            "car.fuel as fuel, " +
+            "car.numDoors as numDoors, " +
+            "car.color as color, " +
+            "model.priceFip as priceFip " +
+            "FROM CarEntity car " +
+            "JOIN car.modelId model")
+    List<CarModelProjection> findAllCarsAndModelName();
+
 
 }

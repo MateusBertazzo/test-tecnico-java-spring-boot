@@ -9,9 +9,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "cars")
 public class CarEntity extends BaseEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Column(name = "timestamp_register")
     private LocalDateTime timestampRegister;

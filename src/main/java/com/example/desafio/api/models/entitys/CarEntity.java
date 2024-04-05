@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CarEntity extends BaseEntity {
 
     @Column(name = "timestamp_register")
-    private LocalDateTime timestampRegister;
+    private Long timestampRegister;
 
     private Integer year;
 
@@ -26,7 +26,7 @@ public class CarEntity extends BaseEntity {
     @JoinColumn(name = "model_id")
     private ModelCarEntity modelId;
 
-    public CarEntity(LocalDateTime timestampRegister, Integer year, String fuel, Integer numDoors, String color, ModelCarEntity modelId) {
+    public CarEntity(Long timestampRegister, Integer year, String fuel, Integer numDoors, String color, ModelCarEntity modelId) {
         this.timestampRegister = timestampRegister;
         this.year = year;
         this.fuel = fuel;

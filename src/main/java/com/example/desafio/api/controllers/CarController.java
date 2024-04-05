@@ -19,6 +19,12 @@ public class CarController {
         this.carService = carService;
     }
 
+    /**
+     * Controller responsável por registrar um carro
+     *
+     * @param   carDto
+     * @return  ResponseEntity<ApiResponseService>
+     */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ApiResponseService> registerCar(@RequestBody CarDto carDto) {
@@ -28,7 +34,7 @@ public class CarController {
     /**
      * Controller responsável por retornar todos os carros e o nome do modelo associado
      *
-     * @return  List<Object[]>
+     * @return  ResponseEntity<ApiResponseService>
      */
     @GetMapping("/get-all")
     @ResponseStatus(HttpStatus.OK)

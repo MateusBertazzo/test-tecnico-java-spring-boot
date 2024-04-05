@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "cars")
-public class Car {
+public class CarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,4 +24,8 @@ public class Car {
     private Integer numDoors;
 
     private String color;
+
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+    private ModelCarEntity modelId;
 }

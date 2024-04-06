@@ -2,6 +2,7 @@ package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.CarDto;
+import com.example.desafio.api.models.entitys.BrandEntity;
 import com.example.desafio.api.models.entitys.CarEntity;
 import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
@@ -37,18 +38,23 @@ public class CarService {
             // Buscando a marca pelo nome
             var brandEntity = brandCarRepository.findByNameBrand(carDto.getBrandName());
 
-            // Se a marca não existir, cria uma nova
+            // verifica se a marca já existe, se não existir cadastra
             if (brandEntity == null) {
                 brandEntity = carDto.toBrand();
                 brandCarRepository.save(brandEntity);
             }
 
-            // Cadastrando o modelo
-            ModelCarEntity modelCarEntity = carDto.toModelCar(brandEntity);
-            modelCarRepository.save(modelCarEntity);
+            // buscando o modelo pelo nome
+            var modelCar = modelCarRepository.findByModelName(carDto.getModelName());
+
+            // verifica se o modelo já existe, se não existir cadastra
+            if (modelCar == null) {
+                modelCar = carDto.toModelCar(brandEntity);
+                modelCarRepository.save(modelCar);
+            }
 
             // Cadastrando o carro
-            CarEntity carEntity = carDto.toCar(modelCarEntity);
+            CarEntity carEntity = carDto.toCar(modelCar);
             carRepository.save(carEntity);
 
             return ApiResponseService.createSuccessResponse("Carro registrado com sucesso", null);

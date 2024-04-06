@@ -1,8 +1,9 @@
 package com.example.desafio.api.controllers;
 
-import com.example.desafio.api.models.dtos.CarDto;
+import com.example.desafio.api.models.dtos.BrandDto;
 import com.example.desafio.api.services.ApiResponseService;
 import com.example.desafio.api.services.BrandService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,13 @@ public class BrandController {
      * Controller responsável por ATUALIZAR uma Marca
      *
      * @param id
-     * @param carDto
+     * @param brandDto
      * @return ResponseEntity<ApiResponseService>
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ApiResponseService> updateBrand(@PathVariable Long id, @RequestBody CarDto carDto) {
-        return brandService.updateBrand(id, carDto);
+    public ResponseEntity<ApiResponseService> updateBrand(@PathVariable Long id,@Valid @RequestBody BrandDto brandDto) {
+        return brandService.updateBrand(id, brandDto);
     }
 
     /**

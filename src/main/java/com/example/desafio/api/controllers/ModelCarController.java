@@ -3,6 +3,7 @@ package com.example.desafio.api.controllers;
 import com.example.desafio.api.models.dtos.CarDto;
 import com.example.desafio.api.services.ApiResponseService;
 import com.example.desafio.api.services.ModelCarService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class ModelCarController {
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ApiResponseService> updateModelCar(@PathVariable Long id, @RequestBody CarDto carDto) {
+    public ResponseEntity<ApiResponseService> updateModelCar(@PathVariable Long id,@Valid @RequestBody CarDto carDto) {
         return modelCarService.updateModelCar(id, carDto);
     }
 

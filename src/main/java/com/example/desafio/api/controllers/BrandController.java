@@ -42,4 +42,16 @@ public class BrandController {
     public ResponseEntity<ApiResponseService> findAll() {
         return brandService.findAll();
     }
+
+    /**
+     * Controller responsável DELETAR uma marca e seus modelos associados
+     *
+     * @param id
+     * @return ResponseEntity<ApiResponseService>
+     */
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponseService> deleteBrand(@PathVariable Long id) {
+        return brandService.deleteBrand(id);
+    }
 }

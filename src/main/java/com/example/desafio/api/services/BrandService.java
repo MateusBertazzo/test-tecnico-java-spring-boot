@@ -46,7 +46,7 @@ public class BrandService {
     }
 
     /**
-     * Método responsável para buscar todas as marcas
+     * Método responsável para BUSCAR todas as marcas
      *
      * @return ResponseEntity<ApiResponseService>
      */
@@ -72,6 +72,34 @@ public class BrandService {
             return ApiResponseService.createSuccessResponse("Marcas encontradas com sucesso", brandDtos);
         } catch (Exception e) {
             return ApiResponseService.createErrorResponse("Erro ao buscar as marcas: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Método responsável por DELETAR uma marca e seus modelos associados
+     *
+     * @param id
+     * @return ResponseEntity<ApiResponseService>
+     */
+    public ResponseEntity<ApiResponseService> deleteBrand(Long id) {
+        try {
+
+            BrandEntity brandEntity = brandRepository.findById(id).orElseThrow(() -> new CarExceptions("Marca não encontrada"));
+
+            brandEntity.setDeleted(true);
+
+            // Deleta todos os modelos associados a marca
+            brandEntity.getModelCars().forEach(modelCar -> modelCar.setDeleted(true));
+
+            // Deleta todos os carros associados aos modelos deletados
+            brandEntity.getModelCars().forEach(modelCar -> modelCar.getCars().forEach(car -> car.setDeleted(true)));
+
+            brandRepository.save(brandEntity);
+
+            return ApiResponseService.createSuccessResponse("Marca deletada com sucesso", null);
+
+        } catch (Exception e) {
+            return ApiResponseService.createErrorResponse("Erro ao deletar a marca: " + e.getMessage());
         }
     }
 }

@@ -2,9 +2,7 @@ package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.CarDto;
-import com.example.desafio.api.models.entitys.BrandEntity;
 import com.example.desafio.api.models.entitys.CarEntity;
-import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
 import com.example.desafio.api.models.repositorys.CarRepository;
 import com.example.desafio.api.models.repositorys.ModelCarRepository;
@@ -84,6 +82,8 @@ public class CarService {
     /**
      * Método responsável por atualizar um carro
      *
+     * @param id
+     * @param carDto
      * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> updateCar(Long id, CarDto carDto) {
@@ -113,6 +113,7 @@ public class CarService {
     /**
      * Método responsável por deletar um carro
      *
+     * @param id
      * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> deleteCar(Long id) {

@@ -29,4 +29,15 @@ public class ModelCarController {
     public ResponseEntity<ApiResponseService> updateModelCar(@PathVariable Long id, @RequestBody CarDto carDto) {
         return modelCarService.updateModelCar(id, carDto);
     }
+
+    /**
+     * Controller responsável por retornar todos os modelos
+     *
+     * @return ResponseEntity<ApiResponseService>
+     */
+    @GetMapping("/get-all")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponseService> getAllModelsCars() {
+        return modelCarService.getAllModelCars();
+    }
 }

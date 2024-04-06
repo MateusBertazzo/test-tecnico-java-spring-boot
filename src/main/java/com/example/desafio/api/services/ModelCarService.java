@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ModelCarService {
 
@@ -21,6 +23,8 @@ public class ModelCarService {
     /**
      * Método responsável por atualizar um carro
      *
+     * @param  id
+     * @param carDto
      * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> updateModelCar(Long id, CarDto carDto) {
@@ -39,4 +43,21 @@ public class ModelCarService {
             return ApiResponseService.createErrorResponse("Erro ao atualizar o modelo: " + e.getMessage());
         }
     }
+
+    /**
+     * Método responsável por buscar todos os modelos
+     *
+     * @return ResponseEntity<ApiResponseService>
+     */
+    public ResponseEntity<ApiResponseService> getAllModelCars() {
+        try {
+            List<ModelCarEntity> getAllModelCars = modelCarRepository.findAll();
+
+            return ApiResponseService.createSuccessResponse("Modelos retornados com sucesso!", getAllModelCars);
+
+        } catch (Exception e) {
+            return ApiResponseService.createErrorResponse("Erro ao atualizar o modelo: " + e.getMessage());
+        }
+    }
+
 }

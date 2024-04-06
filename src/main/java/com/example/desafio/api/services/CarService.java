@@ -51,7 +51,7 @@ public class CarService {
             CarEntity carEntity = carDto.toCar(modelCarEntity);
             carRepository.save(carEntity);
 
-            return ApiResponseService.createSuccessResponse(true, "Carro registrado com sucesso", null);
+            return ApiResponseService.createSuccessResponse("Carro registrado com sucesso", null);
 
         } catch (Exception e) {
             return ApiResponseService.createErrorResponse("Erro ao registrar o carro: " + e.getMessage());
@@ -69,7 +69,7 @@ public class CarService {
         try {
             var getAllCars = carRepository.findAllCarsAndModelName();
 
-            return ApiResponseService.createSuccessResponse(true, "Sucesso", getAllCars);
+            return ApiResponseService.createSuccessResponse("Carros retornados com sucesso!", getAllCars);
         } catch (Exception e) {
             return ApiResponseService.createErrorResponse("Erro ao buscar os carros: " + e.getMessage());
         }
@@ -97,7 +97,7 @@ public class CarService {
 
             carRepository.save(carToUpdate);
 
-            return ApiResponseService.createSuccessResponse(true, "Carro atualizado com sucesso", null);
+            return ApiResponseService.createSuccessResponse("Carro atualizado com sucesso", null);
 
         } catch (Exception e) {
             return ApiResponseService.createErrorResponse("Erro ao atualizar o carro: " + e.getMessage());
@@ -121,7 +121,7 @@ public class CarService {
 
             carRepository.save(carToDelete);
 
-            return ApiResponseService.createSuccessResponse(true, "Carro deletado com sucesso", null);
+            return ApiResponseService.createSuccessResponse("Carro deletado com sucesso", null);
 
         } catch (Exception e) {
             return ApiResponseService.createErrorResponse("Erro ao deletar o carro:" + e.getMessage());

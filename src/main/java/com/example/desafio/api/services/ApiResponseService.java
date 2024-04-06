@@ -3,7 +3,6 @@ package com.example.desafio.api.services;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 @Data
 public class ApiResponseService {
@@ -25,7 +24,7 @@ public class ApiResponseService {
     }
 
     // Case Success
-    public static ResponseEntity<ApiResponseService> createSuccessResponse(Boolean Success, String message, Object response) {
+    public static ResponseEntity<ApiResponseService> createSuccessResponse(String message, Object response) {
         return ResponseEntity.ok(new ApiResponseService(true, message, response));
     }
 

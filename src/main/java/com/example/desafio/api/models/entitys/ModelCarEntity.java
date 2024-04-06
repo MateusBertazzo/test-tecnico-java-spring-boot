@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class ModelCarEntity extends BaseEntity {
 
-    private String name;
+    private String modelName;
 
     @Column(name = "price_fip", precision = 12, scale = 3)
     private BigDecimal priceFip;
@@ -23,8 +23,8 @@ public class ModelCarEntity extends BaseEntity {
     @JoinColumn(name = "brand_id")
     private BrandEntity brandId;
 
-    public ModelCarEntity(String name, BigDecimal priceFip, List<CarEntity> cars, BrandEntity brandId) {
-        this.name = name;
+    public ModelCarEntity(String modelName, BigDecimal priceFip, List<CarEntity> cars, BrandEntity brandId) {
+        this.modelName = modelName;
         this.priceFip = priceFip;
         this.cars = cars;
         this.brandId = brandId;

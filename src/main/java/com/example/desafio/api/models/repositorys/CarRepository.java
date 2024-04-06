@@ -15,7 +15,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
                 "SELECT car.id as id, " +
                 "car.timestampRegister as timestampRegister, " +
                 "car.modelId.id as modelId, " +
-                "model.name as modelName, " +
+                "model.modelName as modelName, " +
                 "car.year as year, " +
                 "car.fuel as fuel, " +
                 "car.numDoors as numDoors, " +

@@ -12,8 +12,8 @@ import java.util.List;
 @Data
 public class ModelCarEntity extends BaseEntity {
 
+    @Column(name = "model_name", unique = true)
     private String modelName;
-
 
     @Column(name = "price_fip", precision = 12, scale = 3)
     private BigDecimal priceFip;

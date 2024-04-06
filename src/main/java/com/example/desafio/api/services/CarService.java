@@ -3,6 +3,7 @@ package com.example.desafio.api.services;
 import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.CarDto;
 import com.example.desafio.api.models.entitys.CarEntity;
+import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
 import com.example.desafio.api.models.repositorys.CarRepository;
 import com.example.desafio.api.models.repositorys.ModelCarRepository;
@@ -33,8 +34,9 @@ public class CarService {
      */
     public ResponseEntity<ApiResponseService> registerCar(CarDto carDto) {
         try {
+
             // Buscando a marca pelo nome
-            var brandEntity = brandCarRepository.findByNameBrand(carDto.getBrandName());
+            var brandEntity = brandCarRepository.findByNameBrand(carDto.getNameBrand());
 
             // verifica se a marca já existe, se não existir cadastra
             if (brandEntity == null) {
@@ -42,17 +44,17 @@ public class CarService {
                 brandCarRepository.save(brandEntity);
             }
 
-            // buscando o modelo pelo nome
-            var modelCar = modelCarRepository.findByModelName(carDto.getModelName());
+            // Buscando o modelo pelo nome
+            ModelCarEntity modelCarEntity = modelCarRepository.findByModelName(carDto.getModelName());
 
-            // verifica se o modelo já existe, se não existir cadastra
-            if (modelCar == null) {
-                modelCar = carDto.toModelCar(brandEntity);
-                modelCarRepository.save(modelCar);
+            // Se o modelo não existir, cria um novo
+            if (modelCarEntity == null) {
+                modelCarEntity = carDto.toModelCar(brandEntity);
+                modelCarRepository.save(modelCarEntity);
             }
 
             // Cadastrando o carro
-            CarEntity carEntity = carDto.toCar(modelCar);
+            CarEntity carEntity = carDto.toCar(modelCarEntity);
             carRepository.save(carEntity);
 
             return ApiResponseService.createSuccessResponse("Carro registrado com sucesso", null);

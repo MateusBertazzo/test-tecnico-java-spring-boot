@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 @Data
 public class CarDto {
 
-    private String brandName;
+    private String nameBrand;
     private String modelName;
     private Integer year;
     private String fuel;
@@ -24,7 +24,7 @@ public class CarDto {
     public BrandEntity toBrand() {
         BrandEntity marcaEntity = new BrandEntity();
 
-        marcaEntity.setNameBrand(brandName);
+        marcaEntity.setNameBrand(nameBrand);
 
         return marcaEntity;
     }

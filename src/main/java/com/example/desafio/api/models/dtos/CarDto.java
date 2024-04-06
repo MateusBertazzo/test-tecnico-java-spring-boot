@@ -33,7 +33,7 @@ public class CarDto {
     public ModelCarEntity toModelCar(BrandEntity brand) {
         ModelCarEntity modelCarEntity = new ModelCarEntity();
 
-        modelCarEntity.setName(modelName);
+        modelCarEntity.setModelName(modelName);
         modelCarEntity.setPriceFip(priceFip);
         modelCarEntity.setBrandId(brand);
 

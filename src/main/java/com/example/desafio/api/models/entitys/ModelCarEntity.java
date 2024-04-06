@@ -1,5 +1,6 @@
 package com.example.desafio.api.models.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,7 +12,8 @@ import java.util.List;
 @Data
 public class ModelCarEntity extends BaseEntity {
 
-    private String name;
+    private String modelName;
+
 
     @Column(name = "price_fip", precision = 12, scale = 3)
     private BigDecimal priceFip;
@@ -19,12 +21,13 @@ public class ModelCarEntity extends BaseEntity {
     @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarEntity> cars;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     private BrandEntity brandId;
 
-    public ModelCarEntity(String name, BigDecimal priceFip, List<CarEntity> cars, BrandEntity brandId) {
-        this.name = name;
+    public ModelCarEntity(String modelName, BigDecimal priceFip, List<CarEntity> cars, BrandEntity brandId) {
+        this.modelName = modelName;
         this.priceFip = priceFip;
         this.cars = cars;
         this.brandId = brandId;

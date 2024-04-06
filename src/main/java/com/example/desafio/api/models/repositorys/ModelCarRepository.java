@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ModelCarRepository extends JpaRepository<ModelCarEntity, Long> {
+    ModelCarEntity findByModelName(String modelName);
 }

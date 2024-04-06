@@ -31,4 +31,15 @@ public class BrandController {
     public ResponseEntity<ApiResponseService> updateBrand(@PathVariable Long id, @RequestBody CarDto carDto) {
         return brandService.updateBrand(id, carDto);
     }
+
+    /**
+     * Controller responsável BUSCAR todas as marcas
+     *
+     * @return ResponseEntity<ApiResponseService>
+     */
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponseService> findAll() {
+        return brandService.findAll();
+    }
 }

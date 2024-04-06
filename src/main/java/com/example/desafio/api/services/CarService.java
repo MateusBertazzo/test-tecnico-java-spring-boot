@@ -1,9 +1,7 @@
 package com.example.desafio.api.services;
 
-import com.example.desafio.api.exceptions.GetAllCarsException;
 import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.CarDto;
-import com.example.desafio.api.models.entitys.BrandEntity;
 import com.example.desafio.api.models.entitys.CarEntity;
 import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
@@ -36,9 +34,14 @@ public class CarService {
      */
     public ResponseEntity<ApiResponseService> registerCar(CarDto carDto) {
         try {
-            // Cadastrando a marca
-            BrandEntity brandEntity = carDto.toBrand();
-            brandCarRepository.save(brandEntity);
+            // Buscando a marca pelo nome
+            var brandEntity = brandCarRepository.findByNameBrand(carDto.getBrandName());
+
+            // Se a marca não existir, cria uma nova
+            if (brandEntity == null) {
+                brandEntity = carDto.toBrand();
+                brandCarRepository.save(brandEntity);
+            }
 
             // Cadastrando o modelo
             ModelCarEntity modelCarEntity = carDto.toModelCar(brandEntity);
@@ -51,7 +54,7 @@ public class CarService {
             return ApiResponseService.createSuccessResponse(true, "Carro registrado com sucesso", null);
 
         } catch (Exception e) {
-            return ApiResponseService.createErrorResponse("Erro ao registrar o carro:" + e.getMessage());
+            return ApiResponseService.createErrorResponse("Erro ao registrar o carro: " + e.getMessage());
         }
     }
 
@@ -68,7 +71,7 @@ public class CarService {
 
             return ApiResponseService.createSuccessResponse(true, "Sucesso", getAllCars);
         } catch (Exception e) {
-            return ApiResponseService.createErrorResponse("Erro ao buscar os carros:" + e.getMessage());
+            return ApiResponseService.createErrorResponse("Erro ao buscar os carros: " + e.getMessage());
         }
     }
 
@@ -80,10 +83,10 @@ public class CarService {
     public ResponseEntity<ApiResponseService> updateCar(Long id, CarDto carDto) {
         try {
 
-            CarEntity carToUpdate = carRepository.findById(id).orElseThrow(() -> new CarExceptions("Carro não encontrado"));
+            CarEntity carToUpdate = carRepository.findById(id).orElseThrow(CarExceptions::new);
 
             if (carToUpdate == null) {
-                return ApiResponseService.createErrorResponse("Carro não encontrado");
+                throw new CarExceptions();
             }
 
             // Atualizando carro
@@ -97,7 +100,7 @@ public class CarService {
             return ApiResponseService.createSuccessResponse(true, "Carro atualizado com sucesso", null);
 
         } catch (Exception e) {
-            return ApiResponseService.createErrorResponse("Erro ao atualizar o carro:" + e.getMessage());
+            return ApiResponseService.createErrorResponse("Erro ao atualizar o carro: " + e.getMessage());
         }
     }
 
@@ -108,10 +111,10 @@ public class CarService {
      */
     public ResponseEntity<ApiResponseService> deleteCar(Long id) {
         try {
-            CarEntity carToDelete = carRepository.findById(id).orElseThrow(() -> new CarExceptions("Carro não encontrado"));
+            CarEntity carToDelete = carRepository.findById(id).orElseThrow(CarExceptions::new);
 
             if (carToDelete == null) {
-                return ApiResponseService.createErrorResponse("Carro não encontrado");
+                throw new CarExceptions();
             }
 
             carToDelete.setDeleted(true);

@@ -60,4 +60,26 @@ public class ModelCarService {
         }
     }
 
+    /**
+     * Método responsável por deletar um modelo
+     *
+     * @param id
+     * @return ResponseEntity<ApiResponseService>
+     */
+    public ResponseEntity<ApiResponseService> deleteModelCar(Long id) {
+        try {
+            ModelCarEntity getModel = modelCarRepository.findById(id).orElseThrow(() -> new CarExceptions("Modelo não encontrado"));
+
+            getModel.setDeleted(true);
+            getModel.getCars().forEach(car -> car.setDeleted(true));
+
+            modelCarRepository.save(getModel);
+
+            return ApiResponseService.createSuccessResponse("Modelo Deletado com sucesso!", null);
+
+        } catch (Exception e) {
+            return ApiResponseService.createErrorResponse("Erro ao deletar modelo: " + e.getMessage());
+        }
+    }
+
 }

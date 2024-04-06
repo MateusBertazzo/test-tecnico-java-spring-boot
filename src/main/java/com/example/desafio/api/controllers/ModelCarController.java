@@ -22,6 +22,7 @@ public class ModelCarController {
     /**
      * Controller responsável por ATUALIZAR um modelo de carro
      *
+     * @param id
      * @return ResponseEntity<ApiResponseService>
      */
     @PutMapping("/update/{id}")
@@ -39,5 +40,16 @@ public class ModelCarController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ApiResponseService> getAllModelsCars() {
         return modelCarService.getAllModelCars();
+    }
+
+    /**
+     * Controller responsável por deletar um modelo
+     *
+     * @return ResponseEntity<ApiResponseService>
+     */
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponseService> deleteModelCar(@PathVariable Long id) {
+        return modelCarService.deleteModelCar(id);
     }
 }

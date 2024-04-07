@@ -4,9 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class BrandDto {
-    private Long id;
-    private Boolean deleted;
+public class BrandRequestDto {
     @NotBlank(message = "O nome da marca é obrigatório")
     private String nameBrand;
 }

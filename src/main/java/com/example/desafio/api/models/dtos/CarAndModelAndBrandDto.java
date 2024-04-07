@@ -14,7 +14,7 @@ import java.time.ZoneOffset;
 import java.util.Calendar;
 
 @Data
-public class CarDto {
+public class CarAndModelAndBrandDto {
 
     @NotBlank(message = "O nome da marca é obrigatório")
     private String nameBrand;

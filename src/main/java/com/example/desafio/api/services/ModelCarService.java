@@ -1,7 +1,7 @@
 package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.CarExceptions;
-import com.example.desafio.api.models.dtos.CarDto;
+import com.example.desafio.api.models.dtos.ModelDto;
 import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.ModelCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +24,16 @@ public class ModelCarService {
      * Método responsável por atualizar um carro
      *
      * @param  id
-     * @param carDto
+     * @param modelDto
      * @return ResponseEntity<ApiResponseService>
      */
-    public ResponseEntity<ApiResponseService> updateModelCar(Long id, CarDto carDto) {
+    public ResponseEntity<ApiResponseService> updateModelCar(Long id, ModelDto modelDto) {
         try {
 
             ModelCarEntity modelCarEntity = modelCarRepository.findById(id).orElseThrow(() -> new CarExceptions("Modelo não encontrado"));
 
-            modelCarEntity.setModelName(carDto.getModelName());
-            modelCarEntity.setPriceFip(carDto.getPriceFip());
+            modelCarEntity.setModelName(modelDto.getModelName());
+            modelCarEntity.setPriceFip(modelDto.getPriceFip());
 
             modelCarRepository.save(modelCarEntity);
 

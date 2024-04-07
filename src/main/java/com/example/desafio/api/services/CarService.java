@@ -1,7 +1,7 @@
 package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.CarExceptions;
-import com.example.desafio.api.models.dtos.CarDto;
+import com.example.desafio.api.models.dtos.CarAndModelAndBrandDto;
 import com.example.desafio.api.models.entitys.CarEntity;
 import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
@@ -29,32 +29,32 @@ public class CarService {
     /**
      * Método responsável por registrar um carro
      *
-     * @param carDto
+     * @param carAndModelAndBrandDto
      * @return ResponseEntity<ApiResponseService>
      */
-    public ResponseEntity<ApiResponseService> registerCar(CarDto carDto) {
+    public ResponseEntity<ApiResponseService> registerCar(CarAndModelAndBrandDto carAndModelAndBrandDto) {
         try {
 
             // Buscando a marca pelo nome
-            var brandEntity = brandCarRepository.findByNameBrand(carDto.getNameBrand());
+            var brandEntity = brandCarRepository.findByNameBrand(carAndModelAndBrandDto.getNameBrand());
 
             // verifica se a marca já existe, se não existir cadastra
             if (brandEntity == null) {
-                brandEntity = carDto.toBrand();
+                brandEntity = carAndModelAndBrandDto.toBrand();
                 brandCarRepository.save(brandEntity);
             }
 
             // Buscando o modelo pelo nome
-            ModelCarEntity modelCarEntity = modelCarRepository.findByModelName(carDto.getModelName());
+            ModelCarEntity modelCarEntity = modelCarRepository.findByModelName(carAndModelAndBrandDto.getModelName());
 
             // Se o modelo não existir, cria um novo
             if (modelCarEntity == null) {
-                modelCarEntity = carDto.toModelCar(brandEntity);
+                modelCarEntity = carAndModelAndBrandDto.toModelCar(brandEntity);
                 modelCarRepository.save(modelCarEntity);
             }
 
             // Cadastrando o carro
-            CarEntity carEntity = carDto.toCar(modelCarEntity);
+            CarEntity carEntity = carAndModelAndBrandDto.toCar(modelCarEntity);
             carRepository.save(carEntity);
 
             return ApiResponseService.createSuccessResponse("Carro registrado com sucesso", null);
@@ -85,10 +85,10 @@ public class CarService {
      * Método responsável por atualizar um carro
      *
      * @param id
-     * @param carDto
+     * @param carAndModelAndBrandDto
      * @return ResponseEntity<ApiResponseService>
      */
-    public ResponseEntity<ApiResponseService> updateCar(Long id, CarDto carDto) {
+    public ResponseEntity<ApiResponseService> updateCar(Long id, CarAndModelAndBrandDto carAndModelAndBrandDto) {
         try {
 
             CarEntity carToUpdate = carRepository.findById(id).orElseThrow(CarExceptions::new);
@@ -98,10 +98,10 @@ public class CarService {
             }
 
             // Atualizando carro
-            carToUpdate.setFuel(carDto.getFuel());
-            carToUpdate.setColor(carDto.getColor());
-            carToUpdate.setYear(carDto.getYear());
-            carToUpdate.setNumDoors(carDto.getNumDoors());
+            carToUpdate.setFuel(carAndModelAndBrandDto.getFuel());
+            carToUpdate.setColor(carAndModelAndBrandDto.getColor());
+            carToUpdate.setYear(carAndModelAndBrandDto.getYear());
+            carToUpdate.setNumDoors(carAndModelAndBrandDto.getNumDoors());
 
             carRepository.save(carToUpdate);
 

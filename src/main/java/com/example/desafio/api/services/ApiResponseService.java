@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 public class ApiResponseService {
 
     private boolean success;
+
     private String message;
+
     private Object response;
 
     public ApiResponseService(boolean success, String message, Object response) {
@@ -18,11 +20,6 @@ public class ApiResponseService {
     }
 
 
-    public ApiResponseService(boolean success, String message) {
-        this.success = success;
-        this.message = message;
-    }
-
     // Case Success
     public static ResponseEntity<ApiResponseService> createSuccessResponse(String message, Object response) {
         return ResponseEntity.ok(new ApiResponseService(true, message, response));
@@ -30,6 +27,6 @@ public class ApiResponseService {
 
     // Case Error
     public static ResponseEntity<ApiResponseService> createErrorResponse(String message) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponseService(false, message));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponseService(false, message, null));
     }
 }

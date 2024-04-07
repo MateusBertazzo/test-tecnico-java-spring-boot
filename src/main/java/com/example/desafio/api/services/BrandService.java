@@ -2,6 +2,7 @@ package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.BrandDto;
+import com.example.desafio.api.models.dtos.BrandRequestDto;
 import com.example.desafio.api.models.entitys.BrandEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ public class BrandService {
      * @param brandDto
      * @return ResponseEntity<ApiResponseService>
      */
-    public ResponseEntity<ApiResponseService> updateBrand(Long id, BrandDto brandDto) {
+    public ResponseEntity<ApiResponseService> updateBrand(Long id, BrandRequestDto brandRequestDto) {
         try {
 
             BrandEntity brandEntity = brandRepository.findById(id).orElseThrow(() -> new CarExceptions("Marca não encontrada"));
 
-            brandEntity.setNameBrand(brandDto.getNameBrand());
+            brandEntity.setNameBrand(brandRequestDto.getNameBrand());
 
             brandRepository.save(brandEntity);
 
@@ -64,7 +65,6 @@ public class BrandService {
                 brandDto.setId(brand.getId());
                 brandDto.setDeleted(brand.getDeleted());
                 brandDto.setNameBrand(brand.getNameBrand());
-
                 brandDtos.add(brandDto);
             }
 

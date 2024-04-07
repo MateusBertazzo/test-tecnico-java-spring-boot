@@ -1,6 +1,6 @@
 package com.example.desafio.api.controllers;
 
-import com.example.desafio.api.models.dtos.CarDto;
+import com.example.desafio.api.models.dtos.CarAndModelAndBrandDto;
 import com.example.desafio.api.services.ApiResponseService;
 import com.example.desafio.api.services.CarService;
 import jakarta.validation.Valid;
@@ -23,13 +23,13 @@ public class CarController {
     /**
      * Controller responsável por REGISTRAR um carro
      *
-     * @param   carDto
+     * @param   carAndModelAndBrandDto
      * @return  ResponseEntity<ApiResponseService>
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ApiResponseService> registerCar(@Valid @RequestBody CarDto carDto) {
-        return carService.registerCar(carDto);
+    public ResponseEntity<ApiResponseService> registerCar(@Valid @RequestBody CarAndModelAndBrandDto carAndModelAndBrandDto) {
+        return carService.registerCar(carAndModelAndBrandDto);
     }
 
     /**
@@ -50,8 +50,8 @@ public class CarController {
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ApiResponseService> updateCar(@PathVariable Long id,@Valid @RequestBody CarDto carDto) {
-        return carService.updateCar(id, carDto);
+    public ResponseEntity<ApiResponseService> updateCar(@PathVariable Long id,@Valid @RequestBody CarAndModelAndBrandDto carAndModelAndBrandDto) {
+        return carService.updateCar(id, carAndModelAndBrandDto);
     }
 
     /**

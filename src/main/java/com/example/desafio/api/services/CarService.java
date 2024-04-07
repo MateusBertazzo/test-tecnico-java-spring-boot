@@ -2,6 +2,7 @@ package com.example.desafio.api.services;
 
 import com.example.desafio.api.exceptions.CarExceptions;
 import com.example.desafio.api.models.dtos.CarAndModelAndBrandDto;
+import com.example.desafio.api.models.dtos.CarRequestDto;
 import com.example.desafio.api.models.entitys.CarEntity;
 import com.example.desafio.api.models.entitys.ModelCarEntity;
 import com.example.desafio.api.models.repositorys.BrandRepository;
@@ -10,6 +11,9 @@ import com.example.desafio.api.models.repositorys.ModelCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.time.Year;
+import java.util.Calendar;
 
 @Service
 public class CarService {
@@ -88,7 +92,7 @@ public class CarService {
      * @param carAndModelAndBrandDto
      * @return ResponseEntity<ApiResponseService>
      */
-    public ResponseEntity<ApiResponseService> updateCar(Long id, CarAndModelAndBrandDto carAndModelAndBrandDto) {
+    public ResponseEntity<ApiResponseService> updateCar(Long id, CarRequestDto carRequestDto) {
         try {
 
             CarEntity carToUpdate = carRepository.findById(id).orElseThrow(CarExceptions::new);
@@ -97,11 +101,19 @@ public class CarService {
                 throw new CarExceptions();
             }
 
+            // Pegando o ano atual
+            int yearCurrent = Calendar.getInstance().get(Calendar.YEAR);
+
+            // Verificando se o ano do carro é maior que o ano atual
+            if (carRequestDto.getYear() > yearCurrent) {
+                throw new IllegalArgumentException("O ano do carro não pode ser maior que o ano atual");
+            }
+
             // Atualizando carro
-            carToUpdate.setFuel(carAndModelAndBrandDto.getFuel());
-            carToUpdate.setColor(carAndModelAndBrandDto.getColor());
-            carToUpdate.setYear(carAndModelAndBrandDto.getYear());
-            carToUpdate.setNumDoors(carAndModelAndBrandDto.getNumDoors());
+            carToUpdate.setFuel(carRequestDto.getFuel());
+            carToUpdate.setColor(carRequestDto.getColor());
+            carToUpdate.setYear(carRequestDto.getYear());
+            carToUpdate.setNumDoors(carRequestDto.getNumDoors());
 
             carRepository.save(carToUpdate);
 

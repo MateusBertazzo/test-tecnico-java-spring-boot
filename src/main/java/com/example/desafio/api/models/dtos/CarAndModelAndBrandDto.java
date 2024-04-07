@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -16,10 +15,10 @@ import java.util.Calendar;
 @Data
 public class CarAndModelAndBrandDto {
 
-    @NotBlank(message = "O nome da marca é obrigatório")
+    @NotBlank(message = "A marca é obrigatória")
     private String nameBrand;
 
-    @NotBlank(message = "O nome do modelo é obrigatório")
+    @NotBlank(message = "O modelo é obrigatório")
     private String modelName;
 
     @Min(value = 1900, message = "O ano deve ser maior que 1900")
@@ -29,6 +28,7 @@ public class CarAndModelAndBrandDto {
     @NotBlank(message = "O combustível é obrigatório")
     private String fuel;
 
+    @Min(value = 2, message = "O número de portas deve igual ou maior que 2")
     @NotNull(message = "O número de portas é obrigatório")
     private Integer numDoors;
 

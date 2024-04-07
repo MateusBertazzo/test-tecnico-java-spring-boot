@@ -28,7 +28,7 @@ public class ModelCarController {
      */
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ApiResponseService> updateModelCar(@PathVariable Long id,@Valid @RequestBody ModelDto modelDto) {
+    public ResponseEntity<ApiResponseService> updateModelCar(@PathVariable Long id, @Valid @RequestBody ModelDto modelDto) {
         return modelCarService.updateModelCar(id, modelDto);
     }
 

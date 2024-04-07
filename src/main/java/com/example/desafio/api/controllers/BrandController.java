@@ -26,7 +26,7 @@ public class BrandController {
         return brandService.updateBrand(id, brandRequestDto);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/get-all")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ApiResponseService> findAll() {
         return brandService.findAll();

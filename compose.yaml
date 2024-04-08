@@ -1,0 +1,37 @@
+networks:
+  application_vol:
+    driver: bridge
+
+volumes:
+  db_data:
+
+services:
+  mysql:
+    container_name: db
+    image: mysql:latest
+    restart: always
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_USERNAME=root
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - application_vol
+    volumes:
+        - db_data:/var/lib/mysql
+
+  application:
+    container_name: app
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=db
+    networks:
+      - application_vol

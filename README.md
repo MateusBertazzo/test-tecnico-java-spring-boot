@@ -445,6 +445,14 @@ Exemplo de resposta em caso de erro - 500 - ServerInternalError:
 http://localhost:8080/swagger-ui/index.html#/
 ```
 
+## Docker e Docker compose
+
+Para subir a aplicação basta rodar o seguinte comando:
+```diff
+docker-compose up --build
+
+```
+
 
 # Tecnologias
 
@@ -455,4 +463,6 @@ http://localhost:8080/swagger-ui/index.html#/
 - Hibernate
 - MySQL;
 - Swagger;
+- Docker
+- Docker compose
 

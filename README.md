@@ -450,8 +450,8 @@ http://localhost:8080/swagger-ui/index.html#/
 Para subir a aplicação basta rodar o seguinte comando:
 ```diff
 docker-compose up --build
-
 ```
+![Docker Run](images/docker.png)
 
 
 # Tecnologias

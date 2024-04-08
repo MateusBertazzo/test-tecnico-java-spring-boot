@@ -2,6 +2,43 @@
 ```diff
  Documentação
 ```
+<details>
+  <summary>Breve explicação sobre minhas decisões:</summary><br />
+
+Arquitetura:
+ 
+```diff
+ Por se tratar de uma pequena API e um projeto pequeno, resolvi usar arquitetura de camadas
+ pela velocidade de desenvolvimento e organização de fácil entendimento.
+```
+Cardialidade:
+ 
+```diff
+ - Um CarEntity está relacionado a um único ModelCarEntity.
+ - Um ModelCarEntity pode estar relacionado a vários CarEntity.
+ 
+ Ou seja um MODELO pode ter vários Carros.
+
+ - Um ModelCarEntity está relacionado a uma única BrandEntity.
+ - Uma BrandEntity pode estar relacionada a vários ModelCarEntity.
+
+ Ou seja uma MARCA pode ter vários MODELOS.
+
+ Logo, para evitar bugs e manter a integridade do banco, decidi que
+ no momento em que registro um carro, automaticamente preciso também
+ registrar um Modelo que por sua vez precisa de uma Marca. Não existe
+ um Carro sem um modelo, como também não existe um Modelo sem uma Marca,
+ não faz sentido cadastrar-los separadamente.
+```
+Método de resposta para o cliente:
+```diff
+ Optei por implementar a classe ApiResponseService, que basicamente serve para padronizar a resposta ao cliente,
+ facilitando a manipulação dos dados retornados pela API, padronizando todos os EndPoints.
+```
+
+
+</details>
+
 
 <details>
 <summary>Banco de dados</summary><br>

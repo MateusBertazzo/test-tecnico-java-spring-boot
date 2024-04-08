@@ -11,8 +11,6 @@ import com.example.desafio.api.models.repositorys.ModelCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.time.Year;
 import java.util.Calendar;
 
 @Service
@@ -51,7 +49,7 @@ public class CarService {
             // Buscando o modelo pelo nome
             ModelCarEntity modelCarEntity = modelCarRepository.findByModelName(carAndModelAndBrandDto.getModelName());
 
-            // Se o modelo não existir, cria um novo
+            // verifica se o modelo já existe, se não existir cadastra
             if (modelCarEntity == null) {
                 modelCarEntity = carAndModelAndBrandDto.toModelCar(brandEntity);
                 modelCarRepository.save(modelCarEntity);
@@ -89,14 +87,16 @@ public class CarService {
      * Método responsável por atualizar um carro
      *
      * @param id
-     * @param carAndModelAndBrandDto
+     * @param carRequestDto
      * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> updateCar(Long id, CarRequestDto carRequestDto) {
         try {
 
+            // Buscando o carro pelo id
             CarEntity carToUpdate = carRepository.findById(id).orElseThrow(CarExceptions::new);
 
+            // Verifica se o carro existe
             if (carToUpdate == null) {
                 throw new CarExceptions();
             }
@@ -132,11 +132,9 @@ public class CarService {
      */
     public ResponseEntity<ApiResponseService> deleteCar(Long id) {
         try {
-            CarEntity carToDelete = carRepository.findById(id).orElseThrow(CarExceptions::new);
 
-            if (carToDelete == null) {
-                throw new CarExceptions();
-            }
+            // Buscando o carro pelo id
+            CarEntity carToDelete = carRepository.findById(id).orElseThrow(() -> new CarExceptions("Carro não encontrado"));
 
             carToDelete.setDeleted(true);
 

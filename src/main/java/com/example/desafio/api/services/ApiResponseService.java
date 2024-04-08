@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+// Método responsavel por retornar uma resposta padronizada para as requisições facilitando para o cliente na manipulação dos dados retornados.
 @Data
 public class ApiResponseService {
 

@@ -23,10 +23,10 @@ public class BrandService {
     }
 
     /**
-     * Método responsável por ATUALIZAR uma Marca
+     * Método responsável por ATUALIZAR marca
      *
      * @param id
-     * @param brandDto
+     * @param brandRequestDto
      * @return ResponseEntity<ApiResponseService>
      */
     public ResponseEntity<ApiResponseService> updateBrand(Long id, BrandRequestDto brandRequestDto) {
@@ -46,7 +46,7 @@ public class BrandService {
     }
 
     /**
-     * Método responsável para BUSCAR todas as marcas
+     * Método responsável por BUSCAR todas as marcas
      *
      * @return ResponseEntity<ApiResponseService>
      */
@@ -60,11 +60,13 @@ public class BrandService {
 
             for (BrandEntity brand : allBrands) {
 
-                // Crio uma instancia de DTO seto os valores, logo depois adiciono eles na lista
+                // Crio uma instância de DTO seto os valores, logo após, adiciono eles na lista
                 BrandDto brandDto = new BrandDto();
+
                 brandDto.setId(brand.getId());
                 brandDto.setDeleted(brand.getDeleted());
                 brandDto.setNameBrand(brand.getNameBrand());
+
                 brandDtos.add(brandDto);
             }
 
@@ -75,7 +77,7 @@ public class BrandService {
     }
 
     /**
-     * Método responsável por DELETAR uma marca e seus modelos associados
+     * Método responsável por DELETAR uma marca
      *
      * @param id
      * @return ResponseEntity<ApiResponseService>
@@ -85,6 +87,7 @@ public class BrandService {
 
             BrandEntity brandEntity = brandRepository.findById(id).orElseThrow(() -> new CarExceptions("Marca não encontrada"));
 
+            // Deleta a marca
             brandEntity.setDeleted(true);
 
             // Deleta todos os modelos associados a marca

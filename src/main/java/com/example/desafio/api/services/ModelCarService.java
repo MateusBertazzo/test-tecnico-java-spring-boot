@@ -7,7 +7,6 @@ import com.example.desafio.api.models.repositorys.ModelCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -30,6 +29,7 @@ public class ModelCarService {
     public ResponseEntity<ApiResponseService> updateModelCar(Long id, ModelDto modelDto) {
         try {
 
+            // Busca o modelo pelo id
             ModelCarEntity modelCarEntity = modelCarRepository.findById(id).orElseThrow(() -> new CarExceptions("Modelo não encontrado"));
 
             modelCarEntity.setModelName(modelDto.getModelName());
@@ -70,7 +70,10 @@ public class ModelCarService {
         try {
             ModelCarEntity getModel = modelCarRepository.findById(id).orElseThrow(() -> new CarExceptions("Modelo não encontrado"));
 
+            // Deleta o modelo
             getModel.setDeleted(true);
+
+            // Deleta todos os carros associados ao modelo
             getModel.getCars().forEach(car -> car.setDeleted(true));
 
             modelCarRepository.save(getModel);

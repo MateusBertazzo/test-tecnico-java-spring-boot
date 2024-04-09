@@ -1,6 +1,7 @@
 package com.example.desafio.api.models.dtos;
 
 import com.example.desafio.api.exceptions.CarExceptions;
+import com.example.desafio.api.models.customvalidation.MaxYear;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +12,8 @@ import java.util.Calendar;
 @Data
 public class CarRequestDto {
 
+    // Validator costumizado para validar o ano do carro
+    @MaxYear
     @Min(value = 1900, message = "O ano deve ser maior que 1900")
     @NotNull(message = "O ano é obrigatório")
     private Integer year;

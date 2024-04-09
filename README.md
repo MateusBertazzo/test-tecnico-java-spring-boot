@@ -503,7 +503,8 @@ feat-versão-api-em-kotlin
 
 # Tecnologias
 
-- Java;
+- Java 17;
+- Kotlin
 - Spring Boot;
 - Spring Validation;
 - JPA

@@ -484,7 +484,7 @@ http://localhost:8080/swagger-ui/index.html#/
 
 ## Docker e Docker compose
 
-Para subir a aplicação basta rodar o seguinte comando:
+Para subir a aplicação com todas as suas dependências e o banco mysql, basta rodar o seguinte comando:
 ```diff
 docker-compose up --build
 ```

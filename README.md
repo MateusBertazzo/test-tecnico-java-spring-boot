@@ -490,6 +490,16 @@ docker-compose up --build
 ```
 ![Docker Run](images/docker.png)
 
+## Versão em Kotlin
+
+Branch:
+```
+feat-versão-api-em-kotlin
+```
+
+![image](https://github.com/MateusBertazzo/test-tecnico-java-spring-boot/assets/77133215/e6dd037e-674e-4b86-ab22-31b0f6a63adf)
+
+
 
 # Tecnologias
 

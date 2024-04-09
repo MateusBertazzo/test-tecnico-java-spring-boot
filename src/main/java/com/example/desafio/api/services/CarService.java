@@ -96,19 +96,6 @@ public class CarService {
             // Buscando o carro pelo id
             CarEntity carToUpdate = carRepository.findById(id).orElseThrow(CarExceptions::new);
 
-            // Verifica se o carro existe
-            if (carToUpdate == null) {
-                throw new CarExceptions();
-            }
-
-            // Pegando o ano atual
-            int yearCurrent = Calendar.getInstance().get(Calendar.YEAR);
-
-            // Verificando se o ano do carro é maior que o ano atual
-            if (carRequestDto.getYear() > yearCurrent) {
-                throw new IllegalArgumentException("O ano do carro não pode ser maior que o ano atual");
-            }
-
             // Atualizando carro
             carToUpdate.setFuel(carRequestDto.getFuel());
             carToUpdate.setColor(carRequestDto.getColor());

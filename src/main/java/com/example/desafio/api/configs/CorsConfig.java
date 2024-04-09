@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// Já que nao sei o domínio do frontend, configurei para aceitar requisições de qualquer origem
 @Configuration
 public class CorsConfig implements WebMvcConfigurer{
     @Override
